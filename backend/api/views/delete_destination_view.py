@@ -32,10 +32,7 @@ class DeleteDestinationView(APIView):
                 {"message": "Destination does not exist"},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        print("yes")
-        print(destination.belonging_user)
-        print(user.username)
-        print("yes")
+
         if user.is_staff:
             if destination.belonging_user.username == "publicUser":
                 destination.delete()
