@@ -81,6 +81,14 @@
 						"header": []
 					},
 					"response": []
+				},
+				{
+					"name": "register_admin",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			]
 		},
@@ -121,35 +129,10 @@
 					"response": []
 				},
 				{
-					"name": "POST-Successful-2",
+					"name": "admin_login",
 					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"user\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/login/",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"login",
-								""
-							]
-						}
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}
@@ -380,6 +363,40 @@
 						{
 							"name": "update_private_destination",
 							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 4,\r\n  \"title\": \"Updated Destination\",\r\n  \"latitude\": 41.7128,\r\n  \"longitude\": -74.0060,\r\n  \"description\": \"Updated description\",\r\n  \"image_url\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/330px-Image_created_with_a_mobile_phone.png\",\r\n  \"arrive_date\": \"2023-05-25\",\r\n  \"depart_date\": \"2023-05-26\",\r\n  \"belonging_user\": \"joelance\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/destinations/update/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"destinations",
+										"update",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "see_specific_destination",
+							"request": {
 								"method": "GET",
 								"header": []
 							},
@@ -440,7 +457,48 @@
 		},
 		{
 			"name": "admins",
-			"item": []
+			"item": [
+				{
+					"name": "add_public_destination",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "see_public_list",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "delete_public_destination",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "update_public_destination",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "see_specific_destination\\",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
