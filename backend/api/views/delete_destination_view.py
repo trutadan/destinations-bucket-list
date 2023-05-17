@@ -5,9 +5,11 @@ from rest_framework.response import Response
 
 from api.models.destination import *
 
+from api.authentication import CustomUserAuthentication
 
 class DeleteDestinationView(APIView):
     permission_classes = [IsAuthenticated]
+    authentication_classes = [CustomUserAuthentication]
 
     def delete(self, request):
         """
@@ -32,7 +34,7 @@ class DeleteDestinationView(APIView):
             )
 
         if user.is_staff:
-            if destination.belonging_user == "public_user":
+            if destination.belonging_user.username == "publicUser":
                 destination.delete()
                 return Response(
                     {"message": "Destination deleted successfully"},
@@ -43,7 +45,7 @@ class DeleteDestinationView(APIView):
                     {"message": "Staff can only delete destinations of public list"},
                     status=status.HTTP_400_BAD_REQUEST
                 )
-        elif user.username == destination.belonging_user:
+        elif user.username == destination.belonging_user.username:
             destination.delete()
             return Response(
                 {"message": "Destination deleted successfully"},

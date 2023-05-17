@@ -3,13 +3,13 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from api.serializers.destination_add_update_serializer import DestinationSerializer
-
-
+from api.authentication import CustomUserAuthentication
 class AddDestinationView(APIView):
     """
     Add new destination
     """
     permission_classes = [IsAuthenticated]
+    authentication_classes = [CustomUserAuthentication]
 
     def post(self, request):
         """
@@ -20,7 +20,7 @@ class AddDestinationView(APIView):
             user = request.user
             belonging_user = request.data['belonging_user']
             if user.is_staff:
-                if belonging_user == "public_user":
+                if belonging_user == "publicUser":
                     serializer.save()
                     return Response(serializer.data, status=status.HTTP_201_CREATED)
                 else:

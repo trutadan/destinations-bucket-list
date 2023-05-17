@@ -15,7 +15,7 @@ def validate_image_url(url):
 
 
 class Destination(models.Model):
-    name = models.CharField(max_length=100, validators=[validators.MinLengthValidator(3)])
+    title = models.CharField(max_length=100, validators=[validators.MinLengthValidator(3)])
     latitude = models.DecimalField(max_digits=9, decimal_places=6,
                                    validators=[validators.MinValueValidator(-90), validators.MaxValueValidator(90)])
     longitude = models.DecimalField(max_digits=9, decimal_places=6,
@@ -25,7 +25,11 @@ class Destination(models.Model):
     arrive_date = models.DateField()
     depart_date = models.DateField()
     description = models.TextField()
-    belonging_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    belonging_user = models.ForeignKey(User, on_delete=models.CASCADE, to_field='username')
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
 
     def clean(self):
         super().clean()
