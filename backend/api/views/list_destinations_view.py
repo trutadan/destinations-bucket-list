@@ -5,12 +5,12 @@ from rest_framework.response import Response
 
 from api.models.destination import *
 from api.serializers.destination_add_update_serializer import DestinationSerializer
-
+from api.authentication import CustomUserAuthentication
 
 class ListDestinationsView(APIView):
 
     permission_classes = [IsAuthenticated]
-
+    authentication_classes = [CustomUserAuthentication]
     def get(self, request):
         """
         List destinations of user, JSON needs to contain 'list' key with value 'private' or 'public'
@@ -18,11 +18,11 @@ class ListDestinationsView(APIView):
         user = request.user
 
         requested_data = request.data.get('list', 'private')
-
+        print(requested_data)
         destinations = []
 
         if user.is_staff:
-            destinations = Destination.objects.filter(belonging_user="public_user")
+            destinations = Destination.objects.filter(belonging_user="publicUser")
             serializer = DestinationSerializer(destinations, many=True)
 
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -33,7 +33,7 @@ class ListDestinationsView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
 
         elif requested_data == "public":
-            destinations = Destination.objects.filter(belonging_user="public_user")
+            destinations = Destination.objects.filter(belonging_user="publicUser")
             serializer = DestinationSerializer(destinations, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
