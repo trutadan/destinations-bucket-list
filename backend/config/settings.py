@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-lra1$u*ditw1kphmf6(!8d%l0)k8y1re)w1@lqxugj+d&b^jwc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'rest_framework',
 
+    'corsheaders',
     'rest_framework.authtoken', 
     'dj_rest_auth',
 ]
@@ -48,7 +49,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -131,6 +133,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # added features
 AUTH_USER_MODEL = 'api.User'
 
+CORS_ALLOWED_ORIGINS = ['http://localhost:5173',]
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
+SESSION_COOKIE_SAMESITE = 'None'
