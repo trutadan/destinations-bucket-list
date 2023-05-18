@@ -12,9 +12,10 @@ import { UserAccountPage } from "./components/user/UserAccountPage";
 import { MissingPage } from "./components/application/MissingPage";
 import { CancelUserAccountContainer } from "./components/user/CancelUserAccountContainer";
 import { EditUserAccountPage } from "./components/user/EditUserAccountPage";
+import { DestinationPublicGetAll } from "./components/destination/DestinationPublicGetAll";
 
 function LayoutsBasedOnNavigationBar() {
-  const includedPaths = ["/"];
+  const includedPaths = ["/", "/public-list"];
   const location = useLocation();
 
   if (includedPaths.includes(location.pathname))
@@ -46,6 +47,8 @@ function App() {
             path="/account/cancel"
             element={<CancelUserAccountContainer />}
           />
+          <Route path="/public-list" element={<DestinationPublicGetAll/>}/>
+          <Route path="/public-list/add-to-private/:id"/>
         </Route>
 
         {/* admin */}
