@@ -24,7 +24,12 @@ export const CancelUserAccountContainer = () => {
     } catch (error) {
       toast.error("Failed to cancel account!");
     }
+
+    localStorage.removeItem("user");
+    localStorage.removeItem("role");
+    localStorage.removeItem("expiration");
     setAuth({});
+
     navigate("/");
   };
 

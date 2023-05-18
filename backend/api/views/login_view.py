@@ -27,9 +27,10 @@ class LoginView(APIView):
         if not user.check_password(password):
             raise AuthenticationFailed('Incorrect password!')
         
+        expiration = (datetime.datetime.utcnow() + datetime.timedelta(minutes=60)).isoformat()
         payload = {
             'id': user.id,
-            'expiration': (datetime.datetime.utcnow() + datetime.timedelta(minutes=60)).isoformat(),
+            'expiration': expiration,
             'iat': int(datetime.datetime.utcnow().timestamp())
         }
 
@@ -38,7 +39,8 @@ class LoginView(APIView):
         response.set_cookie(key='jwt', value=token, httponly=True, path="/", samesite='None', secure=True)
         response.data = {
             'jwt': token,
-            'role': user.role
+            'role': user.role,
+            'expiration': expiration,
         }
 
         return response

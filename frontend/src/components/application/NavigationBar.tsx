@@ -59,7 +59,12 @@ export const NavigationBar = () => {
 
   const handleLogout = () => {
     logout();
+
+    localStorage.removeItem("user");
+    localStorage.removeItem("role");
+    localStorage.removeItem("expiration");
     setAuth({});
+
     navigate("/");
   };
 
@@ -74,19 +79,31 @@ export const NavigationBar = () => {
           <img src={logo} alt="Logo" height="40" />
         </Link>
         <div style={styles.lists}>
-          <Link
-            to="/public-list"
-            style={{ marginRight: "16px", color: "white" }}
-          >
-            PUBLIC LIST
-          </Link>
-          <span style={{ margin: "0 8px", color: "white" }}>&#8226;</span>
-          <Link
-            to="/my-bucket-list"
-            style={{ marginLeft: "16px", color: "white" }}
-          >
-            MY BUCKET LIST
-          </Link>
+          {auth.role === "REGULAR" && (
+            <>
+              <Link
+                to="/public-list"
+                style={{ marginRight: "16px", color: "white" }}
+              >
+                PUBLIC LIST
+              </Link>
+              <span style={{ margin: "0 8px", color: "white" }}>&#8226;</span>
+              <Link
+                to="/my-bucket-list"
+                style={{ marginLeft: "16px", color: "white" }}
+              >
+                MY BUCKET LIST
+              </Link>
+            </>
+          )}
+          {auth.role === "ADMIN" && (
+            <Link
+              to="/public-list"
+              style={{ marginLeft: "16px", color: "white" }}
+            >
+              PUBLIC LIST
+            </Link>
+          )}
         </div>
         {auth.usernameOrEmail ? (
           <div>

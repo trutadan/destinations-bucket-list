@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import logo from "../../assets/logo.png";
 import { PersonAdd } from "@mui/icons-material";
 import { login } from "../../services/authentication";
-import Cookies from "js-cookie";
 
 export const LoginPage = () => {
   const { setAuth } = useAuth();
@@ -41,13 +40,11 @@ export const LoginPage = () => {
       .then((response) => {
         const accessToken = response?.data?.jwt;
         const role = response?.data?.role;
+        const expiration = response?.data?.expiration;
 
-        Cookies.set("jwt", accessToken, {
-          httpOnly: true,
-          domain: "127.0.0.1",
-          path: "/",
-          samesite: "None",
-        });
+        localStorage.setItem("user", usernameOrEmail);
+        localStorage.setItem("role", role);
+        localStorage.setItem("expiration", expiration);
 
         setAuth({ usernameOrEmail, password, role, accessToken });
 
