@@ -3,30 +3,30 @@ import DeleteForeverIcon from "@mui/icons-material/Delete";
 import { Destination } from "../../models/Destination";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getPublicDestinations } from "../../services/destination";
 
 
 export const DestinationPublicGetAll = () => {
     const { auth } = useAuth();
-  
 
-    const destinations : Destination[] = [{
-        title: "ofc",
-        latitude: 32,
-        longitude: 42,
-        image_url: "ceva_poza.jpg",
-        arrive_date: "ofc",
-        depart_date: "ofc",
-        description: "jeahjeah"
-    }]
+    const [destinations, setDestinations] = useState<Destination[]>([]);
+
+    useEffect( () => {
+        getPublicDestinations()
+            .then((response) => {
+                setDestinations(response.data);
+            })}, []);
+        
 
     return (
-        <Container>
+        <Container sx={{width: "100%"}}>
             {auth.role === "ADMIN" && (
-                <Button variant="outlined" sx={{background: "black", color: "white"}} component={Link} to={`/public-list/add`}>
+                <Button variant="outlined" sx={{background: "black", color: "white"}} component={Link} to={`/admin/add-public`}>
                                 + Add new destination
                 </Button>
             )}
-            <TableContainer>
+            <TableContainer sx={{width: "100%"}}>
                 <Table>
                     <TableHead>
                         <TableRow>

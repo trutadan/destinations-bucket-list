@@ -13,9 +13,10 @@ import { MissingPage } from "./components/application/MissingPage";
 import { CancelUserAccountContainer } from "./components/user/CancelUserAccountContainer";
 import { EditUserAccountPage } from "./components/user/EditUserAccountPage";
 import { DestinationPublicGetAll } from "./components/destination/DestinationPublicGetAll";
+import { DestinationAddPublic } from "./components/destination/DestinationAddPublic";
 
 function LayoutsBasedOnNavigationBar() {
-  const includedPaths = ["/", "/public-list"];
+  const includedPaths = ["/", "/public-list", "/admin/add-public"];
   const location = useLocation();
 
   if (includedPaths.includes(location.pathname))
@@ -54,6 +55,7 @@ function App() {
         {/* admin */}
         <Route element={<RequireAuth allowedRoles={["ADMIN"]} />} path="/admin">
           {/* Add admin-specific routes here */}
+          <Route path="/admin/add-public" element={<DestinationAddPublic/>}/>
         </Route>
 
         {/* catch all */}
