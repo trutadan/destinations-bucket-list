@@ -1,7 +1,6 @@
 from api.authentication import CustomUserAuthentication
 from api.serializers.user_account_serializer import UserAccountSerializer
 
-from rest_framework.response import Response
 from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated
 

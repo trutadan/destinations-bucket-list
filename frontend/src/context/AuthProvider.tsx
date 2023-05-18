@@ -4,12 +4,12 @@ type AuthProviderProps = {
   children: ReactNode;
 };
 
-type authContextType = {
+type AuthContextType = {
   auth: any;
   setAuth: any;
 };
 
-const AuthContext = createContext({} as authContextType);
+const AuthContext = createContext({} as AuthContextType);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [auth, setAuth] = useState({});

@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { BACKEND_API_URL } from "../../constants";
 import useAuth from "../../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
 import { Box, Button, Grid, TextField } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import logo from "../../assets/logo.png";
 import { PersonAdd } from "@mui/icons-material";
+import { login } from "../../services/authentication";
+import Cookies from "js-cookie";
 
 export const LoginPage = () => {
   const { setAuth } = useAuth();
@@ -37,31 +37,26 @@ export const LoginPage = () => {
   const handleLoginSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    axios
-      .post(
-        `${BACKEND_API_URL}/login/`,
-        {
-          user: usernameOrEmail,
-          password: password,
-        },
-        {
-          withCredentials: true,
-        }
-      )
+    login(usernameOrEmail, password)
       .then((response) => {
-        const accessToken = response?.data?.accessToken;
+        const accessToken = response?.data?.jwt;
         const role = response?.data?.role;
+
+        Cookies.set("jwt", accessToken, {
+          httpOnly: true,
+          domain: "127.0.0.1",
+          path: "/",
+          samesite: "None",
+        });
+
         setAuth({ usernameOrEmail, password, role, accessToken });
 
-        if (response.data.role !== "REGULAR") navigate("/navigation");
-        else navigate(from, { replace: true });
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         if (error.response && error.response.status === 403) {
-          console.log(error);
           toast.error("Incorrect username/email or password.");
         } else {
-          console.log(error);
           toast.error("Something went wrong. Please try again later.");
         }
       });
