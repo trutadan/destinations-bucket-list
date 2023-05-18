@@ -4,7 +4,7 @@ from api.views.logout_view import LogoutView
 from api.views.cancel_account_view import CancelAccountView
 from api.views.user_account_view import UserAccountView
 from api.views.user_role_view import UserRoleView
-from api.views.user_view import UserListView, UserDetailView
+from api.views.user_view import UserListView, UserDetailView, username_exists, email_exists
 from api.views.add_destination_view import AddDestinationView
 from api.views.update_destination_view import UpdateDestinationView
 from api.views.delete_destination_view import DeleteDestinationView
