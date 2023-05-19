@@ -3,7 +3,7 @@ import { Destination } from "../../models/Destination";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getPrivateDestinations } from "../../services/destination";
-
+import EditIcon from '@mui/icons-material/Edit';
 
 export const DestinationPrivateGetAll = () => {
 
@@ -47,7 +47,22 @@ export const DestinationPrivateGetAll = () => {
                                 <TableCell>{destination.arrive_date}</TableCell>
                                 <TableCell>{destination.depart_date}</TableCell>
                                 <TableCell>{destination.description}</TableCell>
-                                <TableCell></TableCell>
+                                <TableCell>
+                                    <IconButton
+                                        component={Link}
+                                        sx={{
+                                        mr: 3
+                                    }}
+                                        to={`/user/update-private/${destination.id}`}
+                                    >
+                                    <Tooltip title="Update" arrow>
+                                        <EditIcon
+                                            sx={{
+                                            color: "black"
+                                        }}
+                                        />
+                                    </Tooltip>
+                                    </IconButton></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

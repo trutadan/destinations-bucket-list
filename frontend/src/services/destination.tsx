@@ -35,6 +35,20 @@ export const addPublicDestinationToBucket = (id: string | undefined, userName: s
   });
 }
 
+export const updatePrivateDestination = (destination: Destination) => {
+  return axios.put(`${BACKEND_API_URL}/destinations/`, 
+  destination,
+  {
+    withCredentials: true,
+  });
+}
+
+export const getSpecificDestination = (id: string | undefined) =>{
+  return axios.get(`${BACKEND_API_URL}/destinations/search?id=${id}`,
+  {
+    withCredentials: true
+  });
+}
 
 export const getPublicDestinations = () => {
   return axios.get(`${BACKEND_API_URL}/destinations/?list=public`,

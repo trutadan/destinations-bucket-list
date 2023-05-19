@@ -1,8 +1,8 @@
 export class Destination{
     id?: number;
     title: string = "";
-    latitude: number = 0;
-    longitude: number = 0;
+    latitude: string = "";
+    longitude: string = "";
     image_url: string = "";
     arrive_date: string = "";
     depart_date: string = ""; 

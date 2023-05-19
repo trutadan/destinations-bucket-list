@@ -1,18 +1,26 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { DestinationForm } from "./DestinationForm";
 import { Destination } from "../../models/Destination";
 import { toast } from "react-toastify";
-import { addPrivateDestination } from "../../services/destination";
+import { addPrivateDestination, getSpecificDestination, updatePrivateDestination } from "../../services/destination";
 import useAuth from "../../hooks/useAuth";
 
-export const DestinationPrivateAdd = () => {
+export const DestinationPrivateUpdate = () => {
 	const navigate = useNavigate();
+    const {id}  = useParams();
 	const [destination, setDestination] = useState<Destination>(new Destination());
     const {auth} = useAuth();
 
+    useEffect(() => {
+        getSpecificDestination(id)
+            .then((response)=>{
+                setDestination(response.data);
+            });
+    }, []);
+
 	const apiCallMehthod = () => {
-		addPrivateDestination({...destination, belonging_user: auth.usernameOrEmail})
+		updatePrivateDestination(destination)
 			.then(() => {
 				navigate("/user/my-bucket-list");
 			})
@@ -27,7 +35,7 @@ export const DestinationPrivateAdd = () => {
 			apiCallMethod={apiCallMehthod}
 			destination={destination}
 			setDestination={setDestination}
-			btnMsg="Add destination"
+			btnMsg="Update destination"
 		/>
 	)
 };

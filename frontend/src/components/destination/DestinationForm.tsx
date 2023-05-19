@@ -35,12 +35,12 @@ export const DestinationForm = (
 			valid = false;
 		}
 
-		if(isNaN(destination.latitude)){
+		if(isNaN(Number(destination.latitude))){
 			newErrors.latitude="Latitude is required!";
 			valid = false;
 		}
 
-		if(isNaN(destination.longitude)){
+		if(isNaN(Number(destination.longitude))){
 			newErrors.longitude="Latitude is required!";
 			valid = false;
 		}
@@ -99,7 +99,7 @@ export const DestinationForm = (
                             value={destination.latitude}
 							fullWidth
 							sx={{ mb: 2 }}
-							onChange={(event) => setDestination({ ...destination, latitude: Number(event.target.value) })}
+							onChange={(event) => setDestination({ ...destination, latitude: event.target.value })}
 							error={!!errors.latitude}
 							helperText={errors.latitude}
 						/>
@@ -110,7 +110,7 @@ export const DestinationForm = (
                             value={destination.longitude}
 							fullWidth
 							sx={{ mb: 2 }}
-							onChange={(event) => setDestination({ ...destination, longitude: Number(event.target.value) })}
+							onChange={(event) => setDestination({ ...destination, longitude: event.target.value })}
 							error={!!errors.longitude}
 							helperText={errors.longitude}
 						/>

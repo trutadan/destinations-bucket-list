@@ -12,7 +12,7 @@ export const DestinationAddPublic = () => {
 	const apiCallMehthod = () => {
 		addPublicDestination(destination)
 			.then(() => {
-				navigate("/");
+				navigate("/public-list");
 			})
 			.catch((error) =>{
 				toast.error("Something went wrong. Please try again later.");

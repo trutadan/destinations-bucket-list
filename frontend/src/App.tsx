@@ -17,6 +17,7 @@ import { DestinationAddPublic } from "./components/destination/DestinationPublic
 import { DestinationPrivateAdd } from "./components/destination/DestinationPrivateAdd";
 import { DestinationPrivateGetAll } from "./components/destination/DestinationPrivateGetAll";
 import { DestinationAddPublicToBucket } from "./components/destination/DestinationAddPublicToBucket";
+import { DestinationPrivateUpdate } from "./components/destination/DestinationPrivateUpdate";
 
 function LayoutsBasedOnNavigationBar() {
   const includedPaths = ["/", "/public-list", "/admin/add-public", "/user/my-bucket-list", "/user/add-private"];
@@ -67,6 +68,7 @@ function App() {
           <Route path="/user/add-private" element={<DestinationPrivateAdd/>}/>
           <Route path="/user/add-public/:id" element={<DestinationAddPublicToBucket/>}/>
           <Route path="/user/my-bucket-list" element={<DestinationPrivateGetAll/>}></Route>
+          <Route path="/user/update-private/:id" element={<DestinationPrivateUpdate/>}></Route>
         </Route>
 
         {/* catch all */}
