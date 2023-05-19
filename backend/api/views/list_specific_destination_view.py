@@ -20,7 +20,7 @@ class ListSpecificDestinationView(APIView):
         List specific destination. JSON needs to contain 'id' key with value of destination id
         """
         user = request.user
-        destination_id = request.data.get('id', None)
+        destination_id = request.GET.get('id', None)
 
         if destination_id is None:
             return Response(

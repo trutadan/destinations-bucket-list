@@ -13,10 +13,13 @@ import { MissingPage } from "./components/application/MissingPage";
 import { CancelUserAccountContainer } from "./components/user/CancelUserAccountContainer";
 import { EditUserAccountPage } from "./components/user/EditUserAccountPage";
 import { DestinationPublicGetAll } from "./components/destination/DestinationPublicGetAll";
-import { DestinationAddPublic } from "./components/destination/DestinationAddPublic";
+import { DestinationAddPublic } from "./components/destination/DestinationPublicAdd";
+import { DestinationPrivateAdd } from "./components/destination/DestinationPrivateAdd";
+import { DestinationPrivateGetAll } from "./components/destination/DestinationPrivateGetAll";
+import { DestinationAddPublicToBucket } from "./components/destination/DestinationAddPublicToBucket";
 
 function LayoutsBasedOnNavigationBar() {
-  const includedPaths = ["/", "/public-list", "/admin/add-public"];
+  const includedPaths = ["/", "/public-list", "/admin/add-public", "/user/my-bucket-list", "/user/add-private"];
   const location = useLocation();
 
   if (includedPaths.includes(location.pathname))
@@ -49,13 +52,21 @@ function App() {
             element={<CancelUserAccountContainer />}
           />
           <Route path="/public-list" element={<DestinationPublicGetAll/>}/>
-          <Route path="/public-list/add-to-private/:id"/>
+          
         </Route>
 
         {/* admin */}
         <Route element={<RequireAuth allowedRoles={["ADMIN"]} />} path="/admin">
           {/* Add admin-specific routes here */}
           <Route path="/admin/add-public" element={<DestinationAddPublic/>}/>
+        </Route>
+
+        {/* user */}
+        <Route element={<RequireAuth allowedRoles={["REGULAR"]}/>} path="/user">
+          {/* Add user-specific routes here */}
+          <Route path="/user/add-private" element={<DestinationPrivateAdd/>}/>
+          <Route path="/user/add-public/:id" element={<DestinationAddPublicToBucket/>}/>
+          <Route path="/user/my-bucket-list" element={<DestinationPrivateGetAll/>}></Route>
         </Route>
 
         {/* catch all */}

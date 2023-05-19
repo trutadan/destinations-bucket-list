@@ -89,7 +89,7 @@ export const NavigationBar = () => {
               </Link>
               <span style={{ margin: "0 8px", color: "white" }}>&#8226;</span>
               <Link
-                to="/my-bucket-list"
+                to="/user/my-bucket-list"
                 style={{ marginLeft: "16px", color: "white" }}
               >
                 MY BUCKET LIST

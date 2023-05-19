@@ -1,10 +1,6 @@
 import { Button, Card, CardActions, CardContent, IconButton, InputLabel, Select, TextField, MenuItem, Autocomplete} from "@mui/material";
 import { Container } from "@mui/system";
-import { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { BACKEND_API_URL } from "../../constants";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack"
-import axios from "axios";
+import { useState } from "react";
 import { Destination } from "../../models/Destination";
 import { ToastContainer } from "react-toastify";
 

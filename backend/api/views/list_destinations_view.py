@@ -17,7 +17,7 @@ class ListDestinationsView(APIView):
         """
         user = request.user
 
-        requested_data = request.data.get('list', 'private')
+        requested_data = request.GET.get('list', 'private')
         print(requested_data)
         destinations = []
 

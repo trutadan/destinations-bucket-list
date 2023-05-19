@@ -2,9 +2,7 @@ import axios from "axios";
 import { BACKEND_API_URL } from "../constants";
 import { Destination } from "../models/Destination";
 
-export const addDestination = (destination: Destination) => {
-    console.log({...destination, belonging_user: "publicUser"});
-    delete destination["id"];
+export const addPublicDestination = (destination: Destination) => {
     return axios.post(
       `${BACKEND_API_URL}/destinations/add/`,
       {...destination, belonging_user: "publicUser"},
@@ -14,8 +12,38 @@ export const addDestination = (destination: Destination) => {
     );
   };
 
+export const addPrivateDestination = (destination: Destination) => {
+  console.log(destination);
+  return axios.post(
+    `${BACKEND_API_URL}/destinations/add/`,
+    destination,
+    {
+      withCredentials: true,
+    }
+  );
+};
+
+export const addPublicDestinationToBucket = (id: string | undefined, userName: string) => {
+  return axios.get(`${BACKEND_API_URL}/destinations/search?id=${id}`,
+  {
+    withCredentials: true
+  }).
+  then((response) => {
+    var destinationToAdd : Destination = response.data; 
+    destinationToAdd = {...destinationToAdd, belonging_user: userName};
+    addPrivateDestination(destinationToAdd);
+  });
+}
+
+
 export const getPublicDestinations = () => {
-  return axios.get(`${BACKEND_API_URL}/destinations/`, {
-    withCredentials: true,
+  return axios.get(`${BACKEND_API_URL}/destinations/?list=public`,
+  {
+    withCredentials: true
   });
 };
+
+export const getPrivateDestinations = () => {
+  return axios.get(`${BACKEND_API_URL}/destinations/?list=private`, 
+  {withCredentials: true});
+}

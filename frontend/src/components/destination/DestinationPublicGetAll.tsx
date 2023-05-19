@@ -1,11 +1,11 @@
-import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton, Tooltip, Button } from "@mui/material";
-import DeleteForeverIcon from "@mui/icons-material/Delete";
+import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton, Tooltip, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from "@mui/material";
 import { Destination } from "../../models/Destination";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getPublicDestinations } from "../../services/destination";
-
+import { addPrivateDestination, addPublicDestinationToBucket, getPublicDestinations } from "../../services/destination";
+import AddIcon from '@mui/icons-material/Add';
+import { ToastContainer, toast } from "react-toastify";
 
 export const DestinationPublicGetAll = () => {
     const { auth } = useAuth();
@@ -16,17 +16,20 @@ export const DestinationPublicGetAll = () => {
         getPublicDestinations()
             .then((response) => {
                 setDestinations(response.data);
-            })}, []);
-        
+                console.log(response.data);
+            })},
+        []);
+    
 
     return (
-        <Container sx={{width: "100%"}}>
+        <Container sx={{width: "100%", maxWidth: "xl"}}>
             {auth.role === "ADMIN" && (
                 <Button variant="outlined" sx={{background: "black", color: "white"}} component={Link} to={`/admin/add-public`}>
                                 + Add new destination
                 </Button>
             )}
-            <TableContainer sx={{width: "100%"}}>
+            <ToastContainer/>
+            <TableContainer sx={{width: "100%", maxWidth: "xl"}}>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -59,14 +62,16 @@ export const DestinationPublicGetAll = () => {
                                         sx={{
                                         mr: 3
                                     }}
-                                    to={`/public-list/add-to-private/${destination.id}`}>
-                                    <Tooltip title="Delete" arrow>
-                                        <DeleteForeverIcon
+                                        to={`/user/add-public/${destination.id}`}
+                                    >
+                                    <Tooltip title="Add to bucket list" arrow>
+                                        <AddIcon
                                             sx={{
-                                            color: "red"
-                                        }}/>
+                                            color: "black"
+                                        }}
+                                        />
                                     </Tooltip>
-                                </IconButton>
+                                    </IconButton>
                                 )}
                                 </TableCell>
                             </TableRow>
