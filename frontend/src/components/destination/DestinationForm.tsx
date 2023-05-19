@@ -49,7 +49,7 @@ export const DestinationForm = (
 			newErrors.image_url="Image URL is required!";
 			valid = false;
 		}
-
+		
 		if(destination.arrive_date===""){
 			newErrors.arrive_date="Arrive date is required!";
 			valid = false;
@@ -58,6 +58,13 @@ export const DestinationForm = (
         if(destination.depart_date===""){
 			newErrors.arrive_date="Arrive date is required!";
 			valid = false;
+		}
+
+		let arriveDate = new Date(destination.arrive_date).getTime();
+		let departDate = new Date(destination.depart_date).getTime();
+		if(arriveDate > departDate){
+			newErrors.arrive_date="Arrive date must be before the departured date";
+			valid=false;
 		}
     
 		if(destination.description===""){

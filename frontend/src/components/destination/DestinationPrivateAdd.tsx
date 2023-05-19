@@ -17,7 +17,9 @@ export const DestinationPrivateAdd = () => {
 				navigate("/user/my-bucket-list");
 			})
 			.catch((error) =>{
-				Object.entries(error.response.data).forEach(([key, value]) => { 
+				console.log(error);
+				Object.entries(error.response.data).forEach(([key, value] : [string, any]) => { 
+					console.log(key + " " + value);
 					toast.error(key + " : " + value);
 				});
 			});
