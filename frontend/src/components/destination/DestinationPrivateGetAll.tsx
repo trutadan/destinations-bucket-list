@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getPrivateDestinations } from "../../services/destination";
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 export const DestinationPrivateGetAll = () => {
 
@@ -62,7 +63,21 @@ export const DestinationPrivateGetAll = () => {
                                         }}
                                         />
                                     </Tooltip>
-                                    </IconButton></TableCell>
+                                    </IconButton>
+                                    <IconButton
+                                        component={Link}
+                                        sx={{
+                                        mr: 3
+                                    }}
+                                        to={`/user/delete-private/${destination.id}`}>
+                                        <Tooltip title="Delete" arrow>
+                                            <DeleteForeverIcon
+                                                sx={{
+                                                color: "red"
+                                            }}/>
+                                        </Tooltip>
+                                    </IconButton>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

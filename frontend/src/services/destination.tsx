@@ -36,10 +36,17 @@ export const addPublicDestinationToBucket = (id: string | undefined, userName: s
 }
 
 export const updatePrivateDestination = (destination: Destination) => {
-  return axios.put(`${BACKEND_API_URL}/destinations/`, 
+  return axios.put(`${BACKEND_API_URL}/destinations/update/`, 
   destination,
   {
     withCredentials: true,
+  });
+}
+
+export const deletePrivateDestination = (id: string | undefined) => {
+  return axios.delete(`${BACKEND_API_URL}/destinations/delete?id=${id}`,
+  {
+    withCredentials: true
   });
 }
 

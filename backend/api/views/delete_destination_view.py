@@ -17,7 +17,7 @@ class DeleteDestinationView(APIView):
         """
         user = request.user
 
-        requested_data = request.data.get('id', None)
+        requested_data = request.GET.get('id', None)
 
         if requested_data is None:
             return Response(
