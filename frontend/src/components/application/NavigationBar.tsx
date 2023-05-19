@@ -73,7 +73,7 @@ export const NavigationBar = () => {
   };
 
   return (
-    <AppBar position="fixed" style={{ top: 0, backgroundColor: "black" }}>
+    <AppBar position="fixed" style={{ top: 0, backgroundColor: "black"}}>
       <Toolbar>
         <Link to="/" style={styles.logo}>
           <img src={logo} alt="Logo" height="40" />

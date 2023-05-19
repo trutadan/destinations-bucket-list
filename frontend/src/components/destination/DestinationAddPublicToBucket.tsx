@@ -6,6 +6,7 @@ import { BACKEND_API_URL } from "../../constants";
 import { addPublicDestinationToBucket } from "../../services/destination";
 import { Destination } from "../../models/Destination";
 import useAuth from "../../hooks/useAuth";
+import {ToastContainer, toast } from "react-toastify";
 
 export const DestinationAddPublicToBucket = () => {
     const {id} = useParams();
@@ -17,10 +18,13 @@ export const DestinationAddPublicToBucket = () => {
     const handleAdd =  () => {
         addPublicDestinationToBucket(id, userName);
         navigate("/user/my-bucket-list");
+        
+        toast.success("Destination added successfully");
     }
 
     return ( 
         <Container>
+            <ToastContainer/>
             <Card>
                 <IconButton component={Link} to={`/public-list`}>
                     <ArrowBackIcon/>

@@ -22,14 +22,14 @@ export const DestinationPublicGetAll = () => {
     
 
     return (
-        <Container sx={{width: "100%", maxWidth: "xl"}}>
+        <Container maxWidth="xl" sx={{paddingBottom:"80px"}}>
             {auth.role === "ADMIN" && (
                 <Button variant="outlined" sx={{background: "black", color: "white"}} component={Link} to={`/admin/add-public`}>
                                 + Add new destination
                 </Button>
             )}
             <ToastContainer/>
-            <TableContainer sx={{width: "100%", maxWidth: "xl"}}>
+            <TableContainer >
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -51,7 +51,7 @@ export const DestinationPublicGetAll = () => {
                                 <TableCell>{destination.title}</TableCell>
                                 <TableCell>{destination.latitude}</TableCell>
                                 <TableCell>{destination.longitude}</TableCell>
-                                <TableCell>{destination.image_url}</TableCell>
+                                <TableCell><a href={`${destination.image_url}`}>Link</a></TableCell>
                                 <TableCell>{destination.arrive_date}</TableCell>
                                 <TableCell>{destination.depart_date}</TableCell>
                                 <TableCell>{destination.description}</TableCell>

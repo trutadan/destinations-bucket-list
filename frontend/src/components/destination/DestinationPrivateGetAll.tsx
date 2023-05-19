@@ -17,7 +17,7 @@ export const DestinationPrivateGetAll = () => {
         
 
     return (
-        <Container sx={{width: "100%"}}>
+        <Container maxWidth="xl" sx={{paddingTop: "80px"}}>
             <Button variant="outlined" sx={{background: "black", color: "white"}} component={Link} to={`/user/add-private`}>
                             + Add new destination
             </Button>
@@ -43,7 +43,7 @@ export const DestinationPrivateGetAll = () => {
                                 <TableCell>{destination.title}</TableCell>
                                 <TableCell>{destination.latitude}</TableCell>
                                 <TableCell>{destination.longitude}</TableCell>
-                                <TableCell>{destination.image_url}</TableCell>
+                                <TableCell><a href={`${destination.image_url}`}>Link</a></TableCell>
                                 <TableCell>{destination.arrive_date}</TableCell>
                                 <TableCell>{destination.depart_date}</TableCell>
                                 <TableCell>{destination.description}</TableCell>

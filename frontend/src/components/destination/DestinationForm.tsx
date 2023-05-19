@@ -76,7 +76,7 @@ export const DestinationForm = (
 	}
 
     return (
-		<Container>
+		<Container sx={{paddingTop: "80px", paddingBottom: "80px"}}>
 			<ToastContainer/>
 			<Card>
 				<CardContent>
