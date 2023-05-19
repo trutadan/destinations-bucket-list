@@ -13,21 +13,25 @@ export const DestinationPrivateAdd = () => {
 
 	const apiCallMehthod = () => {
 		addPrivateDestination({...destination, belonging_user: auth.usernameOrEmail})
-			.then(() => {
+			.then((response) => {
 				navigate("/user/my-bucket-list");
 			})
 			.catch((error) =>{
-				toast.error("Something went wrong. Please try again later.");
-				console.log(error);
+				Object.entries(error.response.data).forEach(([key, value]) => { 
+					toast.error(key + " : " + value);
+				});
 			});
 	}
 
 	return(
+		<>
 		<DestinationForm
 			apiCallMethod={apiCallMehthod}
 			destination={destination}
 			setDestination={setDestination}
 			btnMsg="Add destination"
 		/>
+		</>
+		
 	)
 };
