@@ -3,7 +3,7 @@ import { addPublicDestination } from "../../services/destination";
 import { useNavigate } from "react-router-dom";
 import { DestinationForm } from "./DestinationForm";
 import { Destination } from "../../models/Destination";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 export const DestinationAddPublic = () => {
 	const navigate = useNavigate();
@@ -12,19 +12,21 @@ export const DestinationAddPublic = () => {
 	const apiCallMehthod = () => {
 		addPublicDestination(destination)
 			.then(() => {
-				navigate("/public-list");
+				toast.success("The destination has been successfully added!");
+				setTimeout(() => {
+					navigate("/public-list");
+				}, 1000);
 			})
-			.catch((error) =>{
+			.catch(() =>{
 				toast.error("Something went wrong. Please try again later.");
 			});
 	}
 
 	return(
-		<DestinationForm
+		<><ToastContainer /> <DestinationForm
 			apiCallMethod={apiCallMehthod}
 			destination={destination}
 			setDestination={setDestination}
-			btnMsg="Add destination"
-		/>
+			btnMsg="Add destination" /></>
 	)
 };

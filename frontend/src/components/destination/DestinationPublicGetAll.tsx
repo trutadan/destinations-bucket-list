@@ -1,26 +1,28 @@
-import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton, Tooltip, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from "@mui/material";
+import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton, Tooltip, Button } from "@mui/material";
 import { Destination } from "../../models/Destination";
 import useAuth from "../../hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { addPrivateDestination, addPublicDestinationToBucket, getPublicDestinations } from "../../services/destination";
+import { getPublicDestinations } from "../../services/destination";
 import AddIcon from '@mui/icons-material/Add';
-import { ToastContainer, toast } from "react-toastify";
 
 export const DestinationPublicGetAll = () => {
     const { auth } = useAuth();
+    const navigate = useNavigate();
 
     const [destinations, setDestinations] = useState<Destination[]>([]);
 
-    useEffect( () => {
-        getPublicDestinations()
-            .then((response) => {
-                setDestinations(response.data);
-                console.log(response.data);
-            })},
-        []);
+    const handleClick = () => {
+        
+    }
     
-
+    useEffect(() => {
+        getPublicDestinations()
+        .then((response) => {
+            setDestinations(response.data);
+        });
+    }, []);
+        
     return (
         <Container maxWidth="xl" sx={{paddingBottom:"80px"}}>
             {auth.role === "ADMIN" && (
@@ -28,7 +30,6 @@ export const DestinationPublicGetAll = () => {
                                 + Add new destination
                 </Button>
             )}
-            <ToastContainer/>
             <TableContainer >
                 <Table>
                     <TableHead>
@@ -62,6 +63,7 @@ export const DestinationPublicGetAll = () => {
                                         sx={{
                                         mr: 3
                                     }}
+                                        onClick={() => {navigate(`/user/add-public/${destination.id}`)}}
                                         to={`/user/add-public/${destination.id}`}
                                     >
                                     <Tooltip title="Add to bucket list" arrow>

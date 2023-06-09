@@ -78,7 +78,6 @@ export const RegisterPage = () => {
         );
       } else {
         toast.success("Your account has been successfully registered!");
-
         navigate("/");
       }
     } catch (error) {

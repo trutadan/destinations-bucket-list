@@ -1,8 +1,9 @@
-import { Button, Card, CardActions, CardContent, IconButton, InputLabel, Select, TextField, MenuItem, Autocomplete} from "@mui/material";
+import { Button, Card, CardActions, CardContent, IconButton, InputLabel, TextField } from "@mui/material";
 import { Container } from "@mui/system";
 import { useState } from "react";
 import { Destination } from "../../models/Destination";
-import { ToastContainer } from "react-toastify";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Link } from "react-router-dom";
 
 export const DestinationForm = (
     { apiCallMethod, destination, setDestination, btnMsg} : 
@@ -83,8 +84,10 @@ export const DestinationForm = (
 	}
 
     return (
-		<Container sx={{paddingTop: "80px", paddingBottom: "80px"}}>
-			<ToastContainer/>
+		<Container sx={{ paddingTop: "80px", paddingBottom: "80px" }}>
+			<IconButton component={Link} to={`/`}>
+				<ArrowBackIcon />
+			</IconButton>
 			<Card>
 				<CardContent>
 					<form onSubmit={handleSubmit}>
@@ -92,87 +95,80 @@ export const DestinationForm = (
 							id="title"
 							label="Title"
 							variant="outlined"
-                            value={destination.title}
+							value={destination.title}
 							fullWidth
 							sx={{ mb: 2 }}
 							onChange={(event) => setDestination({ ...destination, title: event.target.value })}
 							error={!!errors.title}
-							helperText={errors.title}
-						/>
+							helperText={errors.title} />
 						<TextField
 							id="latitude"
 							label="Latitude"
 							variant="outlined"
-                            value={destination.latitude}
+							value={destination.latitude}
 							fullWidth
 							sx={{ mb: 2 }}
 							onChange={(event) => setDestination({ ...destination, latitude: event.target.value })}
 							error={!!errors.latitude}
-							helperText={errors.latitude}
-						/>
+							helperText={errors.latitude} />
 						<TextField
 							id="longitude"
 							label="Longitude"
 							variant="outlined"
-                            value={destination.longitude}
+							value={destination.longitude}
 							fullWidth
 							sx={{ mb: 2 }}
 							onChange={(event) => setDestination({ ...destination, longitude: event.target.value })}
 							error={!!errors.longitude}
-							helperText={errors.longitude}
-						/>
+							helperText={errors.longitude} />
 						<TextField
 							id="image_url"
 							label="Image URL"
 							variant="outlined"
-                            value={destination.image_url}
+							value={destination.image_url}
 							fullWidth
 							sx={{ mb: 2 }}
 							onChange={(event) => setDestination({ ...destination, image_url: event.target.value })}
 							error={!!errors.image_url}
-							helperText={errors.image_url}
-						/>
-						<InputLabel sx={{ float:"left"}}>
+							helperText={errors.image_url} />
+						<InputLabel sx={{ float: "left" }}>
 							Arrive Date:
 						</InputLabel>
 						<TextField
 							type="date"
 							id="arrive_date"
 							variant="outlined"
-                            value={destination.arrive_date}
+							value={destination.arrive_date}
 							fullWidth
 							sx={{ mb: 2 }}
 							onChange={(event) => setDestination({ ...destination, arrive_date: event.target.value })}
 							error={!!errors.arrive_date}
-							helperText={errors.arrive_date}
-						/>
-						<InputLabel sx={{ float:"left"}}>
+							helperText={errors.arrive_date} />
+						<InputLabel sx={{ float: "left" }}>
 							Departure Date:
 						</InputLabel>
 						<TextField
 							type="date"
 							id="depart_date"
 							variant="outlined"
-                            value={destination.depart_date}
+							value={destination.depart_date}
 							fullWidth
 							sx={{ mb: 2 }}
-							onChange={(event) => setDestination({ ...destination, depart_date: event.target.value})}
+							onChange={(event) => setDestination({ ...destination, depart_date: event.target.value })}
 							error={!!errors.depart_date}
-							helperText={errors.depart_date}
-						/>
+							helperText={errors.depart_date} />
 						<TextField
 							type="text-area"
 							id="description"
 							label="Description"
 							variant="outlined"
-                            value={destination.description}
+							value={destination.description}
 							fullWidth
 							sx={{ mb: 2 }}
 							onChange={(event) => setDestination({ ...destination, description: event.target.value })}
 							error={!!errors.description}
-							helperText={errors.description}
-						/>
-						<Button type="submit" sx={{float: "left", color: "white", background: "black"}}>{btnMsg}</Button>
+							helperText={errors.description} />
+						<Button type="submit" sx={{ float: "left", color: "white", background: "black" }}>{btnMsg}</Button>
 					</form>
 				</CardContent>
 				<CardActions></CardActions>

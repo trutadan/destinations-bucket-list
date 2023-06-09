@@ -21,7 +21,7 @@ import { DestinationPrivateUpdate } from "./components/destination/DestinationPr
 import { DestinationPrivateDelete } from "./components/destination/DestinationPrivateDelete";
 
 function LayoutsBasedOnNavigationBar() {
-  const includedPaths = ["/", "/public-list", "/admin/add-public", "/user/my-bucket-list", "/user/add-private"];
+  const includedPaths = ["/", "/public-list", "/admin/add-public", "/user/my-bucket-list", "/user/add-private", "/user/update-private/:id"];
   const location = useLocation();
 
   if (includedPaths.includes(location.pathname))

@@ -13,7 +13,6 @@ export const addPublicDestination = (destination: Destination) => {
   };
 
 export const addPrivateDestination = (destination: Destination) => {
-  console.log(destination);
   return axios.post(
     `${BACKEND_API_URL}/destinations/add/`,
     destination,
@@ -68,3 +67,4 @@ export const getPrivateDestinations = () => {
   return axios.get(`${BACKEND_API_URL}/destinations/?list=private`, 
   {withCredentials: true});
 }
+

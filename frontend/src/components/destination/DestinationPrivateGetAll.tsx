@@ -12,17 +12,17 @@ export const DestinationPrivateGetAll = () => {
 
     useEffect( () => {
         getPrivateDestinations()
-            .then((response) => {
-                setDestinations(response.data);
-            })}, []);
-        
+        .then((response) => {
+            setDestinations(response.data);
+        });
+    }, []);
 
     return (
-        <Container maxWidth="xl" sx={{paddingTop: "80px"}}>
-            <Button variant="outlined" sx={{background: "black", color: "white"}} component={Link} to={`/user/add-private`}>
-                            + Add new destination
+        <Container maxWidth="xl" sx={{ paddingTop: "80px" }}>
+            <Button variant="outlined" sx={{ background: "black", color: "white" }} component={Link} to={`/user/add-private`}>
+                + Add new destination
             </Button>
-            <TableContainer sx={{width: "100%"}}>
+            <TableContainer sx={{ width: "100%" }}>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -36,7 +36,7 @@ export const DestinationPrivateGetAll = () => {
                             <TableCell>Description</TableCell>
                             <TableCell>Operations</TableCell>
                         </TableRow>
-                    </TableHead>  
+                    </TableHead>
                     <TableBody>
                         {destinations.map((destination: Destination, index) => (
                             <TableRow key={index}>
@@ -52,29 +52,28 @@ export const DestinationPrivateGetAll = () => {
                                     <IconButton
                                         component={Link}
                                         sx={{
-                                        mr: 3
-                                    }}
+                                            mr: 3
+                                        }}
                                         to={`/user/update-private/${destination.id}`}
                                     >
-                                    <Tooltip title="Update" arrow>
-                                        <EditIcon
-                                            sx={{
-                                            color: "black"
-                                        }}
-                                        />
-                                    </Tooltip>
+                                        <Tooltip title="Update" arrow>
+                                            <EditIcon
+                                                sx={{
+                                                    color: "black"
+                                                }} />
+                                        </Tooltip>
                                     </IconButton>
                                     <IconButton
                                         component={Link}
                                         sx={{
-                                        mr: 3
-                                    }}
+                                            mr: 3
+                                        }}
                                         to={`/user/delete-private/${destination.id}`}>
                                         <Tooltip title="Delete" arrow>
                                             <DeleteForeverIcon
                                                 sx={{
-                                                color: "red"
-                                            }}/>
+                                                    color: "red"
+                                                }} />
                                         </Tooltip>
                                     </IconButton>
                                 </TableCell>

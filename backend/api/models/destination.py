@@ -3,10 +3,12 @@ from api.models.user import User
 from django.core import validators
 from django.core.exceptions import ValidationError
 import requests
-
-
+from requests.exceptions import MissingSchema
 def validate_image_url(url):
-    response = requests.get(url)
+    try:
+        response = requests.get(url)
+    except MissingSchema as e:
+        raise ValidationError("Invalid URL")
     if response.status_code != 200:
         raise ValidationError("Image URL is invalid")
     content_type = response.headers.get('content-type')
@@ -25,7 +27,7 @@ class Destination(models.Model):
     arrive_date = models.DateField()
     depart_date = models.DateField()
     description = models.TextField()
-    belonging_user = models.ForeignKey(User, on_delete=models.CASCADE, to_field='username')
+    belonging_user = models.ForeignKey(User, db_index=True, on_delete=models.CASCADE, to_field='username')
 
     def save(self, *args, **kwargs):
         self.full_clean()
